@@ -1,43 +1,39 @@
 import random
 
-words = ["UMBRELLA", "CASTLE", "WINDOW", "TRACTOR", "COOKIE"]
-word = random.choice(words)
+vardi = ["LIETUSSARGS", "SPOGULIS", "ZILONIS", "MELLENE", "STĀRĶIS", "PAVASARIS", "MĀKONIS"]
+vards = random.choice(vardi)
 
-lettersToRemove = int(len(words)/1.5)
-hiddenLetters = []
-for x in range(lettersToRemove):
-  pos = random.randrange(0, len(word))
-  if not word[pos] in hiddenLetters:
-    hiddenLetters.append(word[pos])
+liekieBurti = int(len(vards)/1.5)
+sleptieBurti = []
+for x in range(liekieBurti):
+  pozicija = random.randrange(0, len(vards))
+  if not vards[pozicija] in sleptieBurti:
+    sleptieBurti.append(vards[pozicija])
 
-editedWord = word
-for x in hiddenLetters:
-  editedWord = editedWord.replace(x, "_")
+minamaisVards = vards
+for x in sleptieBurti:
+  minamaisVards = minamaisVards.replace(x, "_")
 
-#GUESSING WORD
-print("***GUESS THE WORD***")
-wordGuessed = False
+#VĀRDA MINĒŠANA
+print("***UZMINI VĀRDU***")
 
-editedWordList = []
-for letter in editedWord:
-  editedWordList.append(letter)
+minamaisVardsSarakstaa = []
+for burts in minamaisVards:
+  minamaisVardsSarakstaa.append(burts)
 
-while wordGuessed != True:
+while "_" in minamaisVardsSarakstaa:
   
-  def printWord():
-    for letter in editedWordList:
-      print(letter, end="")
-  printWord()
+  def drukaaVardu():
+    for burts in minamaisVardsSarakstaa:
+      print(burts, end="")
+  drukaaVardu()
 
-  letter = input("\nEnter your guess!")
-  letter = letter.upper()
-  if letter in hiddenLetters:
-    for x in range(len(word)):
-      if letter == word[x]:
-        editedWordList[x] = letter
-    if "_" in editedWordList:
-      continue
-    else:
-      printWord()
-      print("\nWord guessed!")
-      break
+  burts = input("\nEnter your guess!")
+  burts = burts.upper()
+  if burts in sleptieBurti:
+    for x in range(len(vards)):
+      if burts == vards[x]:
+        minamaisVardsSarakstaa[x] = burts
+else:
+  drukaaVardu()
+  print("\nVārds atminēts!")
